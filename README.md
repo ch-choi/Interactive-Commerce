@@ -1,36 +1,81 @@
-# React + Vite
+# 🛒 Interactive Commerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **High-End Interactive Shopping Experience** inspired by minimalist aesthetics and fluid motion.
 
-Currently, two official plugins are available:
+[![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev/)
+[![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)](https://mui.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer--Motion-%230055FF.svg?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Overview
 
-## React Compiler
+**Interactive Commerce** is a premium eCommerce frontend demonstration project. It focuses on breaking the traditional, static shopping mall layout through progressive interaction design. Inspired by sites like `yeezy.com`, this project implements a **Dynamic Grid** system and **Matrix 2D Navigation** to provide an immersive user experience.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project was built using the **"Vibe Coding"** methodology—a modern approach to software development where AI agents like Claude/Cursor assist in transforming high-level design concepts into functional code with expert-level precision.
 
-## Expanding the ESLint configuration
+## 🚀 Key Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Dynamic Interaction Grid**: Elements rearrange fluidly using Framer Motion when filters are applied.
+- **Immersive Zoom Transition**: Click a product to see the entire grid scale and zoom into the selected item seamlessly.
+- **2D Matrix Carousel**: Navigate through different products vertically and view different angles of the same product horizontally.
+- **Responsive Design System**: Tailored for both Desktop and Mobile using a custom design token system.
+- **Hover Motion Effects**: Product cards react to user presence with synchronized video/image transitions.
+- **Storybook Integration**: Every component is isolated and documented for high-quality UI development.
 
-## Ruler로 규칙 중앙 관리
+## 🛠 Tech Stack
 
-이 프로젝트는 `.ruler/` 디렉토리 내 Markdown 규칙을 단일 소스로 관리하고, `@intellectronica/ruler`를 통해 Cursor 등 도구에 적용합니다.
+- **Framework**: React 19 + Vite
+- **UI & Styling**: MUI (Material UI) + Emotion + CSS Glassmorphism
+- **Animations**: Framer Motion 12 (Layout animations, Zoom effects)
+- **Icons**: Phosphor Icons
+- **Testing & Quality**: Vitest + Storybook 10
 
-- 규칙 편집 위치: `.ruler/*.md` (예: `01-code-convention.md`)
-- Cursor 출력 파일(자동 생성): `.cursor/rules/ruler-generated.mdc` (gitignore 처리됨)
+## 📦 Getting Started
 
-### 스크립트
+### Prerequisites
+
+- Node.js (v18 or higher)
+- pnpm (as the specified package manager)
+
+### Installation
 
 ```bash
-pnpm run rules:init          # .ruler/ 및 기본 설정 생성
-pnpm run rules:apply         # 모든 에이전트에 규칙 적용
-pnpm run rules:apply:cursor  # Cursor에만 규칙 적용
+# Clone the repository
+git clone https://github.com/ch-choi/Interactive-Commerce.git
+
+# Navigate to the directory
+cd Interactive-Commerce
+
+# Install dependencies
+pnpm install
 ```
 
-### 편집 플로우
-1. `.ruler/*.md`에서 규칙을 수정합니다.
-2. `pnpm run rules:apply:cursor` 실행으로 반영합니다.
-3. 변경사항을 확인 후 커밋합니다.
+### Development
+
+```bash
+# Start development server
+pnpm dev
+
+# Run Storybook for UI development
+pnpm storybook
+
+# Run tests
+pnpm test
+```
+
+## 📖 Vibe Coding Guide
+
+For a deeper dive into the philosophy and implementation details of this project, please refer to the [VIBE_CODING_GUIDE.md](./VIBE_CODING_GUIDE.md). It contains:
+- Ideation and analysis process.
+- Midjourney prompts for generative product motion.
+- Step-by-step assembly guide using AI agents.
+
+---
+
+## 👨‍💻 Author
+
+**@ch-choi**
+
+## 📄 License
+
+This project is private and for demonstration purposes.

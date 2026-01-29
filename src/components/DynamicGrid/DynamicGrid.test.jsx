@@ -10,15 +10,15 @@ const mockProducts = [
 describe('DynamicGrid', () => {
   it('renders correct number of ProductCards', () => {
     render(<DynamicGrid products={mockProducts} />)
-    const cards = document.querySelectorAll('[style*="aspect-ratio"]')
-    expect(cards.length).toBe(2)
+    expect(screen.getByText('White Hoodie')).toBeDefined()
+    expect(screen.getByText('Black Blazer')).toBeDefined()
   })
 
   it('calls onProductClick when card clicked', () => {
     const handleClick = vi.fn()
     render(<DynamicGrid products={mockProducts} onProductClick={handleClick} />)
-    const cards = document.querySelectorAll('[style*="aspect-ratio"]')
-    if (cards[0]) fireEvent.click(cards[0])
+    const card = screen.getByText('White Hoodie')
+    fireEvent.click(card)
     expect(handleClick).toHaveBeenCalled()
   })
 })

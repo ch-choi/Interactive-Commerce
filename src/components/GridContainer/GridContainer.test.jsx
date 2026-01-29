@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import GridContainer from './GridContainer'
 
 const mockProducts = [
@@ -10,14 +10,14 @@ const mockProducts = [
 describe('GridContainer', () => {
   it('renders DynamicGrid', () => {
     render(<GridContainer products={mockProducts} />)
-    const cards = document.querySelectorAll('[style*="aspect-ratio"]')
-    expect(cards.length).toBe(2)
+    expect(screen.getByText('White Hoodie')).toBeDefined()
+    expect(screen.getByText('Black Blazer')).toBeDefined()
   })
 
   it('handles zoom level changes', () => {
     const { rerender } = render(<GridContainer products={mockProducts} zoomLevel={0} />)
     rerender(<GridContainer products={mockProducts} zoomLevel={1} />)
-    const cards = document.querySelectorAll('[style*="aspect-ratio"]')
-    expect(cards.length).toBe(2)
+    expect(screen.getByText('White Hoodie')).toBeDefined()
+    expect(screen.getByText('Black Blazer')).toBeDefined()
   })
 })

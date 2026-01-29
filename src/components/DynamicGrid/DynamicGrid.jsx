@@ -28,6 +28,7 @@ function DynamicGrid({
             key={product.id}
             layout
             layoutId={`product-${product.id}`}
+            data-product-id={product.id}
             initial={ANIMATION_STATES.INITIAL}
             animate={ANIMATION_STATES.ANIMATE}
             exit={ANIMATION_STATES.EXIT}

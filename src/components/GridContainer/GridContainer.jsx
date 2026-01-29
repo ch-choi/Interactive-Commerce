@@ -24,20 +24,20 @@ function GridContainer({
     const container = containerRef.current
     const wrapper = wrapperRef.current
     const productEl = wrapper.querySelector(`[data-product-id="${selectedProductId}"]`)
-    
+
     if (!productEl) {
       return { x: 0, y: 0, scale: 1 }
     }
 
     const containerRect = container.getBoundingClientRect()
     const productRect = productEl.getBoundingClientRect()
-    
+
     const containerCenterX = containerRect.width / 2
     const containerCenterY = containerRect.height / 2
-    
+
     const productCenterX = productRect.left - containerRect.left + productRect.width / 2
     const productCenterY = productRect.top - containerRect.top + productRect.height / 2
-    
+
     const scale = 2.5
     const x = (containerCenterX - productCenterX) * scale
     const y = (containerCenterY - productCenterY) * scale
@@ -81,10 +81,7 @@ function GridContainer({
         }}
       >
         <DynamicGrid
-          products={products.map(p => ({
-            ...p,
-            'data-product-id': p.id,
-          }))}
+          products={products}
           zoomLevel={zoomLevel}
           onProductClick={handleProductClick}
         />

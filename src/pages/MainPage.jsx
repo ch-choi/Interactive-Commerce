@@ -34,6 +34,10 @@ function MainPage() {
     setSelectedProduct(null)
   }, [])
 
+  const handleProductChange = useCallback((product) => {
+    setSelectedProduct(product)
+  }, [])
+
   const handleBackClick = useCallback(() => {
     if (isDetailOpen) {
       handleDetailClose()
@@ -73,6 +77,7 @@ function MainPage() {
         initialProductIndex={selectedProductIndex}
         isOpen={isDetailOpen}
         onClose={handleDetailClose}
+        onProductChange={handleProductChange}
       />
     </Box>
   )

@@ -135,8 +135,8 @@ Parallel Speedup: ~50% faster than sequential
 
 ## TODOs
 
-- [ ] 1. Replace Header text filters with icon-based filters
-
+- [x] 1. Replace Header text filters with icon-based filters
+  
   **What to do**:
   - Import `TShirt`, `Dress`, `GridFour` from `@phosphor-icons/react`
   - Replace gender filter buttons (lines 80-101) with icon buttons:
@@ -216,8 +216,8 @@ Parallel Speedup: ~50% faster than sequential
 
 ---
 
-- [ ] 2. Modify ProductCard to show name below image
-
+- [x] 2. Modify ProductCard to show name below image
+  
   **What to do**:
   - Remove price overlay section (lines 113-133)
   - Change card structure from overlaid content to stacked layout:
@@ -302,8 +302,8 @@ Parallel Speedup: ~50% faster than sequential
 
 ---
 
-- [ ] 3. Update Header tests for icon-based filters
-
+- [x] 3. Update Header tests for icon-based filters
+  
   **What to do**:
   - Update test "renders filter buttons" (lines 25-30):
     - Remove assertions for text "All", "Men", "Women"
@@ -369,8 +369,8 @@ Parallel Speedup: ~50% faster than sequential
 
 ---
 
-- [ ] 4. Update ProductCard tests for name display
-
+- [x] 4. Update ProductCard tests for name display
+  
   **What to do**:
   - Update test "shows price" (lines 22-25):
     - Rename to "shows product name"

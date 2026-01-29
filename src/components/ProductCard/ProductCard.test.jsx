@@ -19,16 +19,17 @@ describe('ProductCard', () => {
     expect(document.querySelector('img, video')).toBeTruthy()
   })
 
-  it('shows product name', () => {
+  it('shows product name and not price', () => {
     render(<ProductCard product={mockProduct} />)
     expect(screen.getByText('White Hoodie')).toBeTruthy()
+    expect(screen.queryByText(/89.99/)).toBeNull()
   })
 
-  it('calls onClick when clicked', () => {
+  it('calls onClick when clicking the product name', () => {
     const handleClick = vi.fn()
     render(<ProductCard product={mockProduct} onClick={handleClick} />)
-    const card = screen.getByText('White Hoodie').closest('div')
-    fireEvent.click(card)
+    const nameElement = screen.getByText('White Hoodie')
+    fireEvent.click(nameElement)
     expect(handleClick).toHaveBeenCalledWith(mockProduct)
   })
 })

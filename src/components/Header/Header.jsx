@@ -80,6 +80,7 @@ function Header({
           <Stack direction="row" spacing={0.5}>
             <IconButton
               onClick={() => handleGenderFilter('all')}
+              data-testid="filter-gender-all"
               sx={{
                 width: 32,
                 height: 32,
@@ -94,6 +95,7 @@ function Header({
             </IconButton>
             <IconButton
               onClick={() => handleGenderFilter('male')}
+              data-testid="filter-gender-male"
               sx={{
                 width: 32,
                 height: 32,
@@ -108,6 +110,7 @@ function Header({
             </IconButton>
             <IconButton
               onClick={() => handleGenderFilter('female')}
+              data-testid="filter-gender-female"
               sx={{
                 width: 32,
                 height: 32,
@@ -128,6 +131,7 @@ function Header({
             <Button
               size="small"
               onClick={() => handleColorFilter('all')}
+              data-testid="filter-color-all"
               sx={{
                 minWidth: 'auto',
                 px: 1.5,
@@ -145,6 +149,7 @@ function Header({
             </Button>
             <IconButton
               onClick={() => handleColorFilter('white')}
+              data-testid="filter-color-white"
               sx={{
                 width: 32,
                 height: 32,
@@ -167,6 +172,7 @@ function Header({
             </IconButton>
             <IconButton
               onClick={() => handleColorFilter('black')}
+              data-testid="filter-color-black"
               sx={{
                 width: 32,
                 height: 32,

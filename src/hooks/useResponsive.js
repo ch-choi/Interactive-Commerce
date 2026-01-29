@@ -2,22 +2,6 @@ import { useState, useEffect } from 'react';
 import { RESPONSIVE_BREAKPOINTS, getBreakpoint, getColumnsForZoom } from '../constants/responsive';
 
 /**
- * Debounce 유틸리티 함수
- * 연속된 이벤트를 지연시켜 마지막 호출만 실행
- *
- * @param {Function} fn - 실행할 함수
- * @param {number} delay - 지연 시간 (ms)
- * @returns {Function} debounced 함수
- */
-const debounce = (fn, delay) => {
-  let timeoutId;
-  return (...args) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn(...args), delay);
-  };
-};
-
-/**
  * 반응형 브레이크포인트 Hook
  *
  * Window resize 이벤트를 감지하여 현재 브레이크포인트와 설정을 반환합니다.
@@ -37,7 +21,6 @@ const debounce = (fn, delay) => {
  */
 export const useResponsive = () => {
   const [state, setState] = useState(() => {
-    // SSR 안전: window가 없으면 Full HD 기본값 사용
     if (typeof window === 'undefined') {
       return {
         width: 1920,
@@ -56,21 +39,20 @@ export const useResponsive = () => {
   });
 
   useEffect(() => {
-    // SSR 체크
     if (typeof window === 'undefined') return;
 
-    const handleResize = debounce(() => {
+    let timeoutId;
+
+    const handleResize = () => {
       const width = window.innerWidth;
       const breakpoint = getBreakpoint(width);
       const config = RESPONSIVE_BREAKPOINTS[breakpoint];
 
-      // 브레이크포인트가 실제로 변경되었을 때만 업데이트
       setState((prev) => {
         if (prev.breakpoint === breakpoint) {
-          // 브레이크포인트는 같지만 width는 업데이트
           return { ...prev, width };
         }
-        // 브레이크포인트 변경됨
+        
         console.log('📱 Breakpoint changed:', {
           from: prev.breakpoint,
           to: breakpoint,
@@ -79,14 +61,21 @@ export const useResponsive = () => {
         });
         return { width, breakpoint, config };
       });
-    }, 150); // 150ms debounce
+    };
 
-    window.addEventListener('resize', handleResize);
+    const debouncedHandleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(handleResize, 150);
+    };
 
-    // Initial call (마운트 시 정확한 크기 반영)
+    window.addEventListener('resize', debouncedHandleResize);
+
     handleResize();
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', debouncedHandleResize);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   return state;
@@ -119,6 +108,8 @@ export const useResponsiveColumns = (zoomLevel = 0) => {
     gap: config.gap,
     breakpoint,
     config,
+    containerPadding: config.containerPadding,
+    headerPadding: config.headerPadding,
   };
 };
 

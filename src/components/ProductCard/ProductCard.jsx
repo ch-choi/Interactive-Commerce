@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -9,40 +9,45 @@ function ProductCard({ product, onClick }) {
   const [isHovered, setIsHovered] = useState(false)
   const [isJogging, setIsJogging] = useState(false)
   const videoRef = useRef(null)
-  const jogRef = useRef(null)
+
+  useEffect(() => {
+    if (!isJogging) return
+
+    const video = videoRef.current
+    if (!video) return
+
+    // Ensure video is paused when jogging starts
+    video.pause()
+
+    let rafId
+    const jogBack = () => {
+      if (video.currentTime > 0) {
+        video.currentTime = Math.max(0, video.currentTime - (VIDEO_JOG.PLAYBACK_SPEED / VIDEO_JOG.FPS))
+        rafId = requestAnimationFrame(jogBack)
+      } else {
+        setIsJogging(false)
+      }
+    }
+
+    rafId = requestAnimationFrame(jogBack)
+
+    return () => {
+      cancelAnimationFrame(rafId)
+    }
+  }, [isJogging])
 
   const videoSrc = product.images[0]
   const thumbnailSrc = product.images[1]
 
   const handleMouseEnter = useCallback(() => {
-    if (jogRef.current) {
-      cancelAnimationFrame(jogRef.current)
-      jogRef.current = null
-    }
     setIsJogging(false)
     setIsHovered(true)
   }, [])
 
   const handleMouseLeave = useCallback(() => {
     setIsHovered(false)
-    
     if (videoRef.current) {
       setIsJogging(true)
-      const video = videoRef.current
-      const frameTime = 1000 / VIDEO_JOG.FPS
-      
-      const jogBack = () => {
-        if (video.currentTime > 0) {
-          video.currentTime = Math.max(0, video.currentTime - (VIDEO_JOG.PLAYBACK_SPEED / VIDEO_JOG.FPS))
-          jogRef.current = requestAnimationFrame(jogBack)
-        } else {
-          setIsJogging(false)
-          jogRef.current = null
-        }
-      }
-      
-      video.pause()
-      jogRef.current = requestAnimationFrame(jogBack)
     }
   }, [])
 

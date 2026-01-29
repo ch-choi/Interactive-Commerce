@@ -75,6 +75,10 @@ function MediaRenderer({
       video.play().catch(err => {
         console.log('Video autoplay prevented:', err);
       });
+
+      return () => {
+        video.pause();
+      };
     }
   }, [src, isVideoFile, autoPlay, playbackRate]);
 

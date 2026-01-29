@@ -116,7 +116,10 @@ function Matrix2DCarousel({
     }
 
     container.addEventListener('wheel', handleWheel, { passive: false })
-    return () => container.removeEventListener('wheel', handleWheel)
+    return () => {
+      container.removeEventListener('wheel', handleWheel)
+      if (wheelTimeout) clearTimeout(wheelTimeout)
+    }
   }, [goToNextProduct, goToPrevProduct])
 
   if (!currentProduct) return null

@@ -1,0 +1,5 @@
+{
+  "name": "Veo Morph Studio",
+  "description": "Create cinematic AI videos and smooth transitions between images using Google's Veo model.",
+  "requestFramePermissions": []
+}

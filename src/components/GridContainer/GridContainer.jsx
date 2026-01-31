@@ -62,7 +62,7 @@ function GridContainer({
         position: 'relative',
         width: '100%',
         height: '100%',
-        overflow: 'hidden',
+        overflowY: 'auto', // Enable vertical scrolling
         padding: config?.containerPadding || '120px 64px 0 64px',
       }}
     >

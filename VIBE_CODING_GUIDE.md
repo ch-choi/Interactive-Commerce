@@ -126,27 +126,17 @@ pnpm storybook
 a fully unfolded pure [black] male avangrade style [sneakers], displayed flat from a direct frontal view on a perfectly even seamless white background (#FFFFFF), occupying roughly one quarter of the frame, surrounded by generous clean white space. avant-garde minimalist streetwear with sculptural silhouette and refined tailoring, clean structural lines, subtle natural fabric folds expressing form and material tension. no decorative details such as buttons, collars, pockets, or logos architectural minimalism with realistic fabric presence, intentional and balanced. illuminated with perfectly diffused ambient light, calibrated to maintain pure white balance without introducing any warmth or coolness absolute neutral white illumination. a Photoshop-style pure white surface (#FFFFFF) with consistent luminance and no gradient. exposure optimized for full dynamic range, no highlight clipping or tonal compression. the scene uses a 5500K daylight color temperature with noise-free even diffusion, ensuring white areas remain true neutral without grey or yellow tint. perfectly centered, no perspective distortion, wide negative space, professional product photography, Leica S3, 85mm lens, f/8, balanced ISO 100 exposure. ultra-detailed commercial studio shot, hyperreal clarity and tonal precision. captured under uniform white calibration environment white reference card set to #FFFFFF for accurate color and brightness consistency across the frame. no visible photo grain, white noise, or lighting inconsistencies. whites appear as pure optical white rather than off-white or tinted tones.
 ```
 
-[](https://www.notion.so)
-
 이제 다른 측면의 사진, 모델의 착용샷, 그리고 착용샷을 활용한 모션 영상을 만들어야하는데요
 
-- 다른 측면의 사진: 이건 원본 이미지를 선택했을때 우측 패널에서 use의 style을 사용한 뒤 “
+다른 측면의 사진: 이건 원본 이미지를 선택했을때 우측 패널에서 use의 style을 사용한 뒤
 
 side of the sneakers**”** 와 같은 프롬프트를 입력해주시면 됩니다**.**  style은 해당 이미지와 비슷한 스타일 (연출, 렌더링 방식) 등을 뜻하고 여기에 더 정확성을 높이려면 omni paremeter에도 이미지를 추가하는데 omin는 특정 피사체를 그대로 사용하고 싶을때 사용합니다.
-
-[](https://www.notion.so)
 
 그리고 image prompt는 이미지 자체가 프롬프트일 경우인데 이는 이미지의 스타일을 일관성있게 도와주기도 하지만 변하고자 하는 속성을 억제시키는 효과도 있기때문에 상황에 맞게 사용하셔야합니다.
 
 그리고 유사한 방식으로 모델 이미지도 만듭니다.
 
-[](https://www.notion.so)
-
 마지막으로 이 2개 이미지를 모션 파라미터를 활용해서 이어주면되는데 첫번째 이미지 선택후 우측하단에 Animate Manually를 클릭하신후 두번째 모델 사진을 last frame으로 지정합니다. (드래그)
-
-[](https://www.notion.so)
-
-[](https://www.notion.so)
 
 그리고 프롬프트에 다음과 같이 적어줍니다.
 

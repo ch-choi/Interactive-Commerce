@@ -37,7 +37,7 @@ function ProductCard({ product, onClick }) {
   }, [isJogging])
 
   const videoSrc = product.images[0]
-  const thumbnailSrc = product.images[1]
+  const thumbnailSrc = product.images[1] || product.images[0]
 
   const handleMouseEnter = useCallback(() => {
     setIsJogging(false)

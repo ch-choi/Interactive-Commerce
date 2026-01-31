@@ -3,9 +3,10 @@ import Box from '@mui/material/Box'
 import Header from '../components/Header'
 import GridContainer from '../components/GridContainer'
 import ProductDetailView from '../components/ProductDetailView'
-import products from '../data/products'
+import { useAdmin } from '../csm/context/AdminContext'
 
 function MainPage() {
+  const { products } = useAdmin()
   const [zoomLevel, setZoomLevel] = useState(0)
   const [filters, setFilters] = useState({ gender: 'all', color: 'all' })
   const [selectedProduct, setSelectedProduct] = useState(null)
@@ -17,7 +18,7 @@ function MainPage() {
       const colorMatch = filters.color === 'all' || product.color === filters.color
       return genderMatch && colorMatch
     })
-  }, [filters])
+  }, [filters, products])
 
   const handleProductClick = useCallback((product) => {
     setSelectedProduct(product)

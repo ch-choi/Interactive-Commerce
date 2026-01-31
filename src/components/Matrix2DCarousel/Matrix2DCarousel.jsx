@@ -34,6 +34,12 @@ function Matrix2DCarousel({
   const containerRef = useRef(null)
   const { config } = useResponsive()
 
+  // Sync state with props
+  useEffect(() => {
+    setProductIndex(initialProductIndex)
+    setImageIndex(initialImageIndex)
+  }, [initialProductIndex, initialImageIndex])
+
   const currentProduct = products[productIndex]
   const currentImages = currentProduct?.images || []
 

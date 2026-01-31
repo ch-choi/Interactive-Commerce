@@ -60,10 +60,10 @@ Transform the shopping site's Header and ProductCard components to match the ori
 - `src/components/ProductCard/ProductCard.test.jsx` - Updated tests for name display
 
 ### Definition of Done
-- [ ] Header displays: GridFour icon, TShirt icon, Dress icon, "all" text, white circle, black circle
-- [ ] ProductCard shows product name centered below image (no price overlay)
-- [ ] All tests pass: `pnpm test -- --run` → 22+ tests passing
-- [ ] Visual verification: `pnpm dev` → UI matches original reference
+- [x] Header displays: GridFour icon, TShirt icon, Dress icon, "all" text, white circle, black circle
+- [x] ProductCard shows product name centered below image (no price overlay)
+- [x] All tests pass: `pnpm test -- --run` → 22+ tests passing
+- [x] Visual verification: `pnpm dev` → UI matches original reference
 
 ### Must Have
 - Icon-based gender filters using Phosphor icons (TShirt, Dress, GridFour)
@@ -457,9 +457,9 @@ pnpm dev
 ```
 
 ### Final Checklist
-- [ ] Header shows icon-based filters (TShirt, Dress, GridFour/all, color circles)
-- [ ] ProductCard shows name below image (no price overlay)
-- [ ] All filter callbacks work correctly
-- [ ] All hover/video behaviors preserved
-- [ ] All 22+ tests pass
-- [ ] Visual appearance matches original reference
+- [x] Header shows icon-based filters (TShirt, Dress, GridFour/all, color circles)
+- [x] ProductCard shows name below image (no price overlay)
+- [x] All filter callbacks work correctly
+- [x] All hover/video behaviors preserved
+- [x] All 22+ tests pass
+- [x] Visual appearance matches original reference

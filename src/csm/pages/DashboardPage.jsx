@@ -1,33 +1,41 @@
-import { Box, Grid, Paper, Typography, Card, CardContent, Avatar, List, ListItem, ListItemAvatar, ListItemText, Divider } from '@mui/material';
-import { ShoppingBag, ShoppingCart, Users, TrendingUp, DollarSign } from 'lucide-react';
+import { Box, Grid, Paper, Typography, Card, CardContent, Avatar, List, ListItem, ListItemAvatar, ListItemText, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Chip, Container, SvgIcon, Stack } from '@mui/material';
+import { ShoppingBag, ShoppingCart, Users, TrendingUp, DollarSign, ArrowRight } from 'lucide-react';
 import { useAdmin } from '../context/AdminContext';
 
-function StatCard({ title, value, icon, color, trend }) {
+function StatCard({ title, value, icon, color, trend, trendValue }) {
     return (
-        <Card sx={{ height: '100%', borderRadius: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
-            <CardContent sx={{ display: 'flex', flexDirection: 'column', height: '100%', p: 3 }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-                    <Box p={1.5} borderRadius={2} bgcolor={color + '15'} color={color}>
-                        {icon}
-                    </Box>
-                    <Box
-                        px={1} py={0.5}
-                        borderRadius={10}
-                        bgcolor={trend >= 0 ? 'success.light' : 'error.light'}
-                        color={trend >= 0 ? 'success.dark' : 'error.dark'}
-                        display="flex" alignItems="center" gap={0.5}
-                        fontSize="0.75rem" fontWeight="bold"
-                    >
-                        <TrendingUp size={14} />
-                        {trend > 0 ? '+' : ''}{trend}%
-                    </Box>
-                </Box>
-                <Typography variant="h4" fontWeight="bold" sx={{ mb: 0.5 }}>
-                    {value}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {title}
-                </Typography>
+        <Card sx={{ height: '100%', borderRadius: 2, boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.08)' }}>
+            <CardContent>
+                <Stack spacing={3}>
+                    <Stack direction="row" justifyContent="space-between" spacing={3}>
+                        <Stack spacing={1}>
+                            <Typography color="text.secondary" variant="overline">
+                                {title}
+                            </Typography>
+                            <Typography variant="h4">
+                                {value}
+                            </Typography>
+                        </Stack>
+                        <Avatar sx={{ backgroundColor: color, height: 56, width: 56 }}>
+                            <SvgIcon component={icon} inheritViewBox />
+                        </Avatar>
+                    </Stack>
+                    {trend && (
+                        <Stack alignItems="center" direction="row" spacing={2} sx={{ mt: 2 }}>
+                            <Stack alignItems="center" direction="row" spacing={0.5}>
+                                <SvgIcon color={trend === 'up' ? 'success' : 'error'} fontSize="small">
+                                    <TrendingUp />
+                                </SvgIcon>
+                                <Typography color={trend === 'up' ? 'success.main' : 'error.main'} variant="body2">
+                                    {trendValue}%
+                                </Typography>
+                            </Stack>
+                            <Typography color="text.secondary" variant="caption">
+                                Since last month
+                            </Typography>
+                        </Stack>
+                    )}
+                </Stack>
             </CardContent>
         </Card>
     );
@@ -37,122 +45,147 @@ export default function DashboardPage() {
     const { products, orders, customers } = useAdmin();
 
     const totalRevenue = orders.reduce((sum, order) => sum + parseFloat(order.total), 0).toFixed(2);
-    const pendingOrders = orders.filter(o => o.status === 'Pending').length;
 
     return (
-        <Box>
-            <Box sx={{ mb: 4 }}>
-                <Typography variant="h4" fontWeight="bold" gutterBottom>
-                    Dashboard Overview
+        <Box
+            component="main"
+            sx={{
+                flexGrow: 1,
+                py: 2 // min padding
+            }}
+        >
+            <Container maxWidth={false}>
+                <Typography variant="h4" sx={{ mb: 3 }}>
+                    Overview
                 </Typography>
-                <Typography color="text.secondary">
-                    Welcome back! Here's what's happening with your store today.
-                </Typography>
-            </Box>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6} lg={3}>
+                        <StatCard
+                            title="TOTAL REVENUE"
+                            value={`$${totalRevenue}`}
+                            icon={DollarSign}
+                            color="success.main"
+                            trend="up"
+                            trendValue={12}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6} lg={3}>
+                        <StatCard
+                            title="ACTIVE ORDERS"
+                            value={orders.length}
+                            icon={ShoppingCart}
+                            color="primary.main"
+                            trend="up"
+                            trendValue={8}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6} lg={3}>
+                        <StatCard
+                            title="TOTAL PRODUCTS"
+                            value={products.length}
+                            icon={ShoppingBag}
+                            color="warning.main"
+                            trend="down"
+                            trendValue={2}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6} lg={3}>
+                        <StatCard
+                            title="TOTAL CUSTOMERS"
+                            value={customers.length}
+                            icon={Users}
+                            color="error.main" // Just for variety/matching Devias distinct colors often used
+                            trend="up"
+                            trendValue={24}
+                        />
+                    </Grid>
 
-            <Grid container spacing={3} sx={{ mb: 4 }}>
-                <Grid item xs={12} sm={6} md={3}>
-                    <StatCard
-                        title="Total Revenue"
-                        value={`$${totalRevenue}`}
-                        icon={<DollarSign size={24} />}
-                        color="#00C853"
-                        trend={12}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
-                    <StatCard
-                        title="Active Orders"
-                        value={orders.length}
-                        icon={<ShoppingCart size={24} />}
-                        color="#2979FF"
-                        trend={8}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
-                    <StatCard
-                        title="Total Products"
-                        value={products.length}
-                        icon={<ShoppingBag size={24} />}
-                        color="#FF6D00"
-                        trend={-2}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
-                    <StatCard
-                        title="Total Customers"
-                        value={customers.length}
-                        icon={<Users size={24} />}
-                        color="#651FFF"
-                        trend={24}
-                    />
-                </Grid>
-            </Grid>
+                    <Grid item xs={12} lg={8}>
+                        <Card sx={{ height: '100%', borderRadius: 2, boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.08)' }}>
+                            <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <Typography variant="h6">Latest Orders</Typography>
+                            </Box>
+                            <Divider />
+                            <TableContainer>
+                                <Table>
+                                    <TableHead sx={{ bgcolor: 'background.default' }}>
+                                        <TableRow>
+                                            <TableCell>Order ID</TableCell>
+                                            <TableCell>Customer</TableCell>
+                                            <TableCell>Date</TableCell>
+                                            <TableCell>Status</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {orders.slice(0, 6).map((order) => (
+                                            <TableRow hover key={order.id}>
+                                                <TableCell sx={{ fontWeight: 500 }}>
+                                                    {order.id}
+                                                </TableCell>
+                                                <TableCell>
+                                                    Customer #{order.customerId}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {new Date().toLocaleDateString()}
+                                                </TableCell>
+                                                <TableCell>
+                                                    <Chip
+                                                        label={order.status}
+                                                        color={order.status === 'Delivered' ? 'success' : 'warning'}
+                                                        size="small"
+                                                        variant="outlined"
+                                                    />
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                            <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end' }}>
+                                <Typography variant="button" sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer', color: 'primary.main' }}>
+                                    View All <ArrowRight size={16} style={{ marginLeft: 4 }} />
+                                </Typography>
+                            </Box>
+                        </Card>
+                    </Grid>
 
-            <Grid container spacing={3}>
-                <Grid item xs={12} md={8}>
-                    <Paper sx={{ p: 3, borderRadius: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
-                        <Typography variant="h6" fontWeight="bold" sx={{ mb: 3 }}>
-                            Recent Orders
-                        </Typography>
-                        <List>
-                            {orders.slice(0, 5).map((order, index) => (
-                                <div key={order.id}>
-                                    <ListItem sx={{ py: 2, px: 0 }}>
+                    <Grid item xs={12} lg={4}>
+                        <Card sx={{ height: '100%', borderRadius: 2, boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.08)' }}>
+                            <Box sx={{ p: 2 }}>
+                                <Typography variant="h6">Latest Products</Typography>
+                            </Box>
+                            <Divider />
+                            <List>
+                                {products.slice(0, 5).map((product, index) => (
+                                    <ListItem
+                                        divider={index < products.length - 1}
+                                        key={product.id}
+                                    >
                                         <ListItemAvatar>
-                                            <Avatar sx={{ bgcolor: 'primary.light', color: 'primary.main' }}>
-                                                <ShoppingCart size={20} />
-                                            </Avatar>
+                                            <Avatar
+                                                src={product.image}
+                                                variant="rounded"
+                                                sx={{ width: 48, height: 48 }}
+                                            />
                                         </ListItemAvatar>
                                         <ListItemText
-                                            primary={<Typography fontWeight="600">{order.id}</Typography>}
-                                            secondary={`Customer #${order.customerId} • ${order.items} items`}
-                                        />
-                                        <Box sx={{ textAlign: 'right' }}>
-                                            <Typography fontWeight="bold">${order.total}</Typography>
-                                            <Typography variant="caption" color="text.secondary"
-                                                sx={{
-                                                    display: 'inline-block',
-                                                    px: 1, py: 0.25,
-                                                    borderRadius: 1,
-                                                    bgcolor: order.status === 'Delivered' ? 'success.light' : 'warning.light',
-                                                    color: order.status === 'Delivered' ? 'success.dark' : 'warning.dark'
-                                                }}
-                                            >
-                                                {order.status}
-                                            </Typography>
-                                        </Box>
-                                    </ListItem>
-                                    {index < 4 && <Divider variant="inset" component="li" />}
-                                </div>
-                            ))}
-                        </List>
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                    <Paper sx={{ p: 3, borderRadius: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
-                        <Typography variant="h6" fontWeight="bold" sx={{ mb: 3 }}>
-                            New Customers
-                        </Typography>
-                        <List>
-                            {customers.slice(0, 5).map((customer, index) => (
-                                <div key={customer.id}>
-                                    <ListItem sx={{ py: 1.5, px: 0 }}>
-                                        <ListItemAvatar>
-                                            <Avatar src={`https://i.pravatar.cc/150?u=${customer.id}`} />
-                                        </ListItemAvatar>
-                                        <ListItemText
-                                            primary={<Typography fontWeight="500">{customer.name}</Typography>}
-                                            secondary={customer.email}
+                                            primary={product.name}
+                                            secondary={`Updated ${new Date().toLocaleDateString()} • ${product.stock} in stock`}
+                                            primaryTypographyProps={{ variant: 'subtitle2' }}
+                                            secondaryTypographyProps={{ variant: 'body2' }}
                                         />
                                     </ListItem>
-                                    {index < 4 && <Divider variant="inset" component="li" />}
-                                </div>
-                            ))}
-                        </List>
-                    </Paper>
+                                ))}
+                            </List>
+                            <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end' }}>
+                                <Typography variant="button" sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer', color: 'primary.main' }}>
+                                    View All <ArrowRight size={16} style={{ marginLeft: 4 }} />
+                                </Typography>
+                            </Box>
+                        </Card>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </Container>
         </Box>
     );
 }

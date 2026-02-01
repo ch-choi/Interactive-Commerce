@@ -29,7 +29,7 @@ export default function AdminLayout() {
     };
 
     const drawerContent = (
-        <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', bgcolor: '#1a1a1a', color: 'white' }}>
+        <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', bgcolor: '#1C2536', color: 'white' }}>
             <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', py: 2 }}>
                 <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', letterSpacing: 1 }}>
                     CSM ADMIN
@@ -155,9 +155,13 @@ export default function AdminLayout() {
                 component="main"
                 sx={{
                     flexGrow: 1,
-                    p: 3,
-                    width: { md: `calc(100% - ${drawerWidth}px)` },
-                    mt: 8,
+                    p: 3, // Restore some padding but could be 0 if needed
+                    pt: 11, // Adjust for AppBar (mt: 8 + extra)
+                    minHeight: '100vh',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '100%', // Explicitly take full width
+                    overflow: 'auto',
                 }}
             >
                 <Outlet />

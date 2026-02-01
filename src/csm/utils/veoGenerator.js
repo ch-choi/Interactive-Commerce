@@ -46,7 +46,7 @@ export async function generateVeoVideo(
     }
 
     // 3. Initiate Generation
-    const finalPrompt = prompt && prompt.trim() ? prompt.trim() : "A cinematic product transformation.";
+    const finalPrompt = prompt && prompt.trim() ? prompt.trim() : "A cinematic product transformation between images.";
 
     if (onProgress) onProgress("Sending request to Veo...");
 
